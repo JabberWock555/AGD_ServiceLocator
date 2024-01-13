@@ -9,19 +9,8 @@ using ServiceLocator.Player;
 
 namespace ServiceLocator.UI
 {
-    public class UIService : MonoBehaviour
-    {
-        private static UIService instance;
-        public static UIService Instance { get { return instance; } }
-
-        private void Awake()
-        {
-            if (instance == null)
-                instance = this;
-            else
-                Destroy(this.gameObject);
-        }
-
+    public class UIService : GenericMonoSingleton<UIService>
+    { 
         [SerializeField] private EventService eventService;
 
         [Header("Gameplay Panel")]

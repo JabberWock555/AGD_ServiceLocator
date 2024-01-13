@@ -10,21 +10,8 @@ using ServiceLocator.Player;
 
 namespace ServiceLocator.Wave
 {
-    public class WaveService : MonoBehaviour
+    public class WaveService : GenericMonoSingleton<WaveService>
     {
-        private static WaveService instance;
-        public static WaveService Instance { get { return instance; } }
-
-        private void Awake()
-        {
-            if (instance == null)
-                instance = this;
-            else
-                Destroy(this.gameObject);
-        }
-
-        [SerializeField] private EventService eventService;
-
         [SerializeField] private WaveScriptableObject waveScriptableObject;
         private BloonPool bloonPool;
 
@@ -44,7 +31,7 @@ namespace ServiceLocator.Wave
             activeBloons = new List<BloonController>();
         }
 
-        private void SubscribeToEvents() => eventService.OnMapSelected.AddListener(LoadWaveDataForMap);
+        private void SubscribeToEvents() => EventService.Instance.OnMapSelected.AddListener(LoadWaveDataForMap);
 
         private void LoadWaveDataForMap(int mapId)
         {

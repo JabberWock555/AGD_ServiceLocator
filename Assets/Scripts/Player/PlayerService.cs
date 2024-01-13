@@ -7,18 +7,8 @@ using ServiceLocator.Sound;
 
 namespace ServiceLocator.Player
 {
-    public class PlayerService : MonoBehaviour
+    public class PlayerService : GenericMonoSingleton<PlayerService>
     {
-        private static PlayerService instance;
-        public static PlayerService Instance { get { return instance; } }
-
-        private void Awake()
-        {
-            if (instance == null)
-                instance = this;
-            else
-                Destroy(this.gameObject);
-        }
 
         [SerializeField] public PlayerScriptableObject playerScriptableObject;
 
