@@ -8,6 +8,17 @@ namespace ServiceLocator.Map
 {
     public class MapService : MonoBehaviour
     {
+        private static MapService instance;
+        public static MapService Instance { get { return instance; } }
+
+        private void Awake()
+        {
+            if (instance == null)
+                instance = this;
+            else
+                Destroy(this.gameObject);
+        }
+
         [SerializeField] private EventService eventService;
         [SerializeField] private MapScriptableObject mapScriptableObject;
 
