@@ -6,9 +6,9 @@ using ServiceLocator.Events;
 
 namespace ServiceLocator.Map
 {
-    public class MapService : MonoBehaviour
+    public class MapService : GenericMonoSingleton<MapService>
     {
-        [SerializeField] private EventService eventService;
+
         [SerializeField] private MapScriptableObject mapScriptableObject;
 
         private Grid currentGrid;
@@ -23,7 +23,7 @@ namespace ServiceLocator.Map
             ResetTileOverlay();
         }
 
-        private void SubscribeToEvents() => eventService.OnMapSelected.AddListener(LoadMap);
+        private void SubscribeToEvents() => EventService.Instance.OnMapSelected.AddListener(LoadMap);
 
         private void LoadMap(int mapId)
         {
